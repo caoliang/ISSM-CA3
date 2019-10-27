@@ -1,3 +1,5 @@
 data/temp_data.csv
 .ipynb_checkpoints/
 CA3ModelV1_model.hdf5
+
+/.idea/*
