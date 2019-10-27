@@ -17,6 +17,7 @@ from tensorflow.keras.layers import BatchNormalization
 from tensorflow.keras.layers import Activation
 from tensorflow.keras.layers import MaxPool3D
 from tensorflow.keras.layers import add
+from tensorflow.keras.layers import Lambda
 from tensorflow.keras.layers import Dropout
 from tensorflow.keras.regularizers import l2
 from tensorflow.keras.utils import to_categorical
@@ -120,7 +121,20 @@ def build_3d_AE(optimizer=None, dropout_rate=0.2, num_units=16):
                           activation='relu',
                           padding='same', 
                           data_format="channels_last")(encode_layer)
-        
+    
+    encode_layer = Conv3D(64, kernel_size=(2, 2, 2), 
+                          strides=(2, 2, 1), 
+                          activation='relu',
+                          padding='same', 
+                          data_format="channels_last")(encode_layer)
+    
+    encode_layer = Conv3D(128, kernel_size=(2, 2, 2), 
+                          strides=(2, 2, 1), 
+                          activation='relu',
+                          padding='same', 
+                          data_format="channels_last")(encode_layer)
+    
+    
 #    encode_layer = Flatten()(encode_layer)
 #    encode_layer = Dense(2 * num_units, activation='relu')(encode_layer)
 #    encode_layer = Dense(num_units, activation='relu')(encode_layer)
@@ -129,8 +143,22 @@ def build_3d_AE(optimizer=None, dropout_rate=0.2, num_units=16):
 #    decode_layer = Dense(2 * num_units, activation='relu')(encode_layer)
 #    decode_layer = Dense(inner_shape[0] * inner_shape[1] * 
 #                         inner_shape[2] * 32, activation='relu')(encode_layer)
-    decode_layer = Reshape((inner_shape[0], inner_shape[1], 
-                            inner_shape[2], 32))(encode_layer)
+#    decode_layer = Reshape((inner_shape[0], inner_shape[1], 
+#                            inner_shape[2], 32))(encode_layer)
+
+    decode_layer = Conv3DTranspose(128, kernel_size=(2, 2, 2), 
+                                   strides=(2, 2, 1), 
+                                   activation='relu',
+                                   padding='valid', 
+                                   data_format="channels_last")(encode_layer)
+    
+    decode_layer = Lambda(lambda x: x[:, :, 0:-1, 0:-1, :])(decode_layer)
+
+    decode_layer = Conv3DTranspose(64, kernel_size=(2, 2, 2), 
+                                   strides=(2, 2, 1), 
+                                   activation='relu',
+                                   padding='same', 
+                                   data_format="channels_last")(decode_layer)
     
     decode_layer = Conv3DTranspose(32, kernel_size=(2, 2, 2), 
                                    strides=(2, 2, 1), 
@@ -384,7 +412,7 @@ if show_trained_model:
     show_model_summary = False
     
         # Whether show prediction differences on board
-    show_board_diff = False
+    show_board_diff = True
     
         # Show individual chip location time series differences
     show_chip_diff = True
