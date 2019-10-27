@@ -121,16 +121,16 @@ def build_3d_AE(optimizer=None, dropout_rate=0.2, num_units=16):
                           padding='same', 
                           data_format="channels_last")(encode_layer)
         
-    encode_layer = Flatten()(encode_layer)
-    encode_layer = Dense(2 * num_units, activation='relu')(encode_layer)
-    encode_layer = Dense(num_units, activation='relu')(encode_layer)
-    
-        # decoding layer
-    decode_layer = Dense(2 * num_units, activation='relu')(encode_layer)
-    decode_layer = Dense(inner_shape[0] * inner_shape[1] * 
-                         inner_shape[2] * 32, activation='relu')(decode_layer)
+#    encode_layer = Flatten()(encode_layer)
+#    encode_layer = Dense(2 * num_units, activation='relu')(encode_layer)
+#    encode_layer = Dense(num_units, activation='relu')(encode_layer)
+#    
+#        # decoding layer
+#    decode_layer = Dense(2 * num_units, activation='relu')(encode_layer)
+#    decode_layer = Dense(inner_shape[0] * inner_shape[1] * 
+#                         inner_shape[2] * 32, activation='relu')(encode_layer)
     decode_layer = Reshape((inner_shape[0], inner_shape[1], 
-                            inner_shape[2], 32))(decode_layer)
+                            inner_shape[2], 32))(encode_layer)
     
     decode_layer = Conv3DTranspose(32, kernel_size=(2, 2, 2), 
                                    strides=(2, 2, 1), 
@@ -183,7 +183,7 @@ def show_training(epoch_out_file=None):
     plt.figure()
     plt.plot(records['val_loss'])
     plt.plot(records['loss'])
-    plt.yticks([0.00,0.05, 0.10,0.15,0.20])
+    plt.yticks([0.000,0.025, 0.050,0.075,0.100])
     plt.title('Loss value',fontsize=12)
 #    ax = plt.gca()
 #    ax.set_xticklabels([])
@@ -325,9 +325,9 @@ saved_model_file = modelname + '_model.hdf5'
 saved_training_file = modelname + '_train.csv'
 saved_model_design_file = modelname + '_design.pdf'
 chips_temp_file = 'data/temp_data.csv'
-num_feature_units = 64
+num_feature_units = 8 * 5 * 10
 
-optmz = optimizers.Adam(lr=0.00001)
+optmz = optimizers.Adam(lr=0.0001)
 
     # Whether perform training
 perform_training_process = True
@@ -399,23 +399,46 @@ if show_trained_model:
         pretrained_ae_model.summary()
 
         # Load pre-trained model
-    decoded_tr_data = pretrained_ae_model.predict(tr_data)
+    encoded_tr_data = pretrained_ae_model.predict(tr_data)
+
+    encoded_ts_data = pretrained_ae_model.predict(ts_data)
 
     if show_board_diff:
             # Show original data
         print()
-        print('Original data, shape: ', tr_data.shape)
+        print('Training data, shape: ', tr_data.shape)
+        print('Decoded Training data, shape: ', encoded_tr_data.shape)
+        print('Test data, shape: ', ts_data.shape)
+        print('Decoded Test data, shape: ', encoded_ts_data.shape)
+        
+        print()
+        print('Training Data - Borad Temperature ')
         show_board_snapshot(tr_data, tr_lbl, 
                             range(0, tr_data.shape[0], 
                                   int(tr_data.shape[0] / 4)), 
                             clrmap='gist_heat')
             # Show decoded data
         print()
-        print('Decoded data, shape: ', decoded_tr_data.shape)
-        show_board_snapshot(decoded_tr_data, tr_lbl, 
-                            range(0, decoded_tr_data.shape[0], 
-                                  int(decoded_tr_data.shape[0] / 5)), 
+        print('Encoded Training Data - Borad Temperature ')
+        show_board_snapshot(encoded_tr_data, tr_lbl, 
+                            range(0, encoded_tr_data.shape[0], 
+                                  int(encoded_tr_data.shape[0] / 5)), 
                             clrmap='gist_heat')
+
+        print()
+        print('Test Data - Borad Temperature ')
+        show_board_snapshot(ts_data, ts_lbl, 
+                            range(0, ts_data.shape[0], 
+                                  int(ts_data.shape[0] / 4)), 
+                            clrmap='gist_heat')
+            # Show decoded data
+        print()
+        print('Encoded Test Data - Borad Temperature ')
+        show_board_snapshot(encoded_ts_data, tr_lbl, 
+                            range(0, encoded_ts_data.shape[0], 
+                                  int(encoded_ts_data.shape[0] / 5)), 
+                            clrmap='gist_heat')
+
 
     if show_chip_diff:
         chip_loc_x = 0
@@ -423,9 +446,14 @@ if show_trained_model:
         chip_loc = chip_loc_x * 20 + chip_loc_y
         
         print()
-        print(('Show chip location [{0}, {1}] temperature time series '
-              + 'differences').format(chip_loc_x, chip_loc_y))
+        print(('Training vs Encoded Data - Chip [{0}, {1}] Temperature '
+               ).format(chip_loc_x, chip_loc_y))
+        show_time_series_image(tr_data, encoded_tr_data, chip_loc,
+                               images_in_row=8, clrmap='gist_heat')
         
-        show_time_series_image(tr_data, decoded_tr_data, chip_loc,
+        print()
+        print(('Test vs Encoded Data - Chip [{0}, {1}] Temperature '
+               ).format(chip_loc_x, chip_loc_y))
+        show_time_series_image(ts_data, encoded_ts_data, chip_loc,
                                images_in_row=8, clrmap='gist_heat')
         
