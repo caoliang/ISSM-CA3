@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import h5py
 import matplotlib.pyplot as plt
 import sklearn.metrics as metrics
 from sklearn.model_selection import train_test_split
@@ -186,16 +187,22 @@ def build_3d_AE(optimizer=None, dropout_rate=0.2, num_units=16):
 
 
 def lrSchedule(epoch):
-    lr  = 0.5e-5
+    lr  = 1e-5
     
-    if epoch > 30:
-        lr  *= 0.5e-6
+    if epoch > 80:
+        lr  *= 0.5e-1
         
-    elif epoch > 20:
-        lr  *= 1e-6
+    elif epoch > 30:
+        lr  *= 1e-1    
+        
+#    elif epoch > 20:
+#        lr  *= 1e-1
         
     elif epoch > 10:
-        lr  *= 1e-5
+        lr  *= 1e-1
+#    
+#    elif epoch > 5:
+#        lr  *= 1e-1
         
     print('Learning rate: ', lr)
     
@@ -357,6 +364,75 @@ def show_board_snapshot(data_x, data_y, x_index_list,
     plt.show()
 
 
+def show_mse_hist(data_x, encoded_x, data_threshold, loc_row, loc_col,
+                  hist_bins=100, hist_title='MSE Histogram'):
+    board_size = data_x.shape[0]
+    row_size = data_x.shape[1]
+    col_size = data_x.shape[2]
+    ts_size = data_x.shape[3]
+    
+#    print('MSE Histogram [{0}, {1}], Threshold: {2}'.format(loc_row, loc_col,
+#          data_threshold[loc_row, loc_col]))
+    
+    scored = pd.DataFrame()
+    chip_data = data_x[:, loc_row, loc_col, :, :].reshape(board_size, ts_size)
+    chip_encoded = encoded_x[:, loc_row, loc_col, :, :].reshape(board_size, ts_size)
+    
+    chip_hist_title = '{0} [{1}, {2}] Threshold {3:.4f}'.format(
+            hist_title, loc_row, loc_col, data_threshold[loc_row, loc_col])
+    
+    scored[chip_hist_title] = compute_mse(chip_data, chip_encoded)
+    hist = scored.hist(bins = hist_bins)
+
+
+def compute_mse(data_in, data_pred):
+    return np.linalg.norm(data_pred - data_in, axis=-1)
+
+def compute_mse_threshold(data_x, encoded_x, top_percentage):
+    board_size = data_x.shape[0]
+    row_size = data_x.shape[1]
+    col_size = data_x.shape[2]
+    ts_size = data_x.shape[3]
+    loc_index = 0
+    threshold_list = []
+    
+    for i in range(row_size):
+        for j in range(col_size):
+            loc_index = i * row_size + j
+            data_ts = data_x[:, i, j, :, :].reshape(board_size, ts_size)
+            encoded_ts = encoded_x[:, i, j, :, :].reshape(board_size, ts_size)
+            mse_ts = compute_mse(data_ts, encoded_ts)
+            mse_hist, mse_hist_edges = np.histogram(mse_ts, bins=100)
+            mse_threshold = mse_hist_edges[-top_percentage]
+            
+            threshold_list.append(mse_threshold)
+        
+            if loc_index % 100 == 0:
+                print('[{0},{1}] = {2:.5f}'.format(i, j, mse_threshold))
+
+    threshold_arr = np.array(threshold_list).reshape(row_size, col_size)
+    print(threshold_arr.shape)
+
+    return threshold_arr
+    
+def save_mse_threshold(threshold_data, h5_out_file='mse_threshold.h5'):
+    dt = h5py.special_dtype(vlen=str)
+    
+    with h5py.File(h5_out_file, 'w') as hf:
+        
+        hf.create_dataset(name="mse_threshold", shape=threshold_data.shape, 
+                          dtype=np.single,
+                          compression="gzip", compression_opts=9)
+        hf['mse_threshold'][...] = threshold_data
+        print('Save threshold_data: ', threshold_data.shape)
+
+def read_mse_threshold(h5_in_file='mse_threshold.h5'):
+    with h5py.File(h5_in_file, 'r') as hf:
+        mse_threshold = hf['mse_threshold'].value
+        print('Read mse_threshold: ', mse_threshold.shape)        
+        
+    return mse_threshold
+
     # fix random seed for reproducibility
 seed = 49
 np.random.seed(seed)
@@ -372,10 +448,13 @@ saved_model_file = modelname + '_model.hdf5'
 saved_training_file = modelname + '_train.csv'
 saved_model_design_file = modelname + '_design.pdf'
 chips_temp_file = 'data/temp_data.csv'
+saved_threshold_file = modelname + '_threshold.hdf5'
+
 num_feature_units = 8 * 5 * 10
+mse_threshold_percent = 1
 
 learning_rate = 1e-04
-epochs_size = 30
+epochs_size = 2
 batch_size = 1
 
 optmz = optimizers.Adam(lr=learning_rate)
@@ -384,11 +463,12 @@ optmz = optimizers.Adam(lr=learning_rate)
     # Whether perform training
 perform_training_process = True
 
-    # Whether show trained model
-show_trained_model = True
+        # Whether show trained model
+show_trained_model = False
 
     # Whether using real data or random generated data (experiment only) 
 test_on_real_data = True
+
 
 if test_on_real_data:
     tr_data, tr_lbl, ts_data, ts_lbl = prepare_dataset(
@@ -412,6 +492,9 @@ channel = tr_data.shape[4]
 
 if perform_training_process:
 
+        # Whether perform threshold computation
+    perform_computing_threshold = True
+    
         # Build autoencoder
     ae_3d_model = build_3d_AE(optimizer=optmz, dropout_rate=0.2, 
                               num_units=num_feature_units)
@@ -429,6 +512,25 @@ if perform_training_process:
         # Export model design
     export_3d_AE(ae_model=ae_3d_model, 
                  export_model_file=saved_model_design_file)
+
+    if perform_computing_threshold:
+        encoded_tr_data = ae_3d_model.predict(tr_data)
+        threshold_data = compute_mse_threshold(tr_data, encoded_tr_data, 
+                                               mse_threshold_percent)
+        save_mse_threshold(threshold_data, h5_out_file=saved_threshold_file)
+        threshold_saved = read_mse_threshold(h5_in_file=
+                                                  saved_threshold_file)
+        
+        check_pos_list = [(0, 0), (3, 4), (6,8), (9,12),
+                          (12,16), (25,0), (28,4), (31,8)]
+        for pos in check_pos_list:
+            if threshold_data[pos[0], pos[1]] != threshold_saved[pos[0], pos[1]]:
+                print('Error! incorrect saved threshold [{0}, {1}]={2}'.format(
+                       pos[0], pos[1], threshold_saved[pos[0], pos[1]])) 
+                
+            show_mse_hist(tr_data, encoded_tr_data, threshold_saved,
+                          pos[0], pos[1])
+        
 
 if show_trained_model:
     
@@ -486,7 +588,7 @@ if show_trained_model:
             # Show decoded data
         print()
         print('Encoded Test Data - Borad Temperature ')
-        show_board_snapshot(encoded_ts_data, tr_lbl, 
+        show_board_snapshot(encoded_ts_data, ts_lbl, 
                             range(0, encoded_ts_data.shape[0], 
                                   int(encoded_ts_data.shape[0] / 5)), 
                             clrmap='gist_heat')
