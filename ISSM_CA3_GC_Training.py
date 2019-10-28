@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import h5py
+import os
 import matplotlib.pyplot as plt
 import sklearn.metrics as metrics
 from sklearn.model_selection import train_test_split
@@ -24,34 +25,6 @@ from tensorflow.keras.regularizers import l2
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras import optimizers
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-
-def generate_dataset(number_of_samples=10):
-    mean_temp = 80
-    var_temp = 0.8
-    
-    ts_X = np.random.normal(mean_temp, var_temp, 
-                            size=(number_of_samples, 32, 20, 20))
-    #print('ts_x', ts_X[0:1])            
-        
-    # 5d shape with channels last
-    ts_X = np.array(ts_X).reshape((number_of_samples, 32, 20, 20, 1))
-    ts_Y = np.array(range(number_of_samples))
-    
-    size_train = int(number_of_samples / 10 * 8)
-    
-    X_train = ts_X[0:size_train, :, :, :]
-    print('Read X_train: ', X_train.shape)
-    
-    y_train = ts_Y[0:size_train]
-    print('Read y_train: ', y_train.shape)        
-    
-    X_test = ts_X[size_train:number_of_samples, :, :, :]
-    print('Read X_test: ', X_test.shape)        
-    
-    y_test = ts_Y[size_train:number_of_samples]
-    print('Read y_test: ', y_test.shape)        
-
-    return (X_train, y_train, X_test, y_test)
 
 def prepare_dataset(data_csv_file='data/temp_data.csv'):
         # Step 1. Read chip temperature data from CSV file
@@ -103,19 +76,12 @@ def build_3d_AE(optimizer=None, dropout_rate=0.2, num_units=16):
         # input 5D shape
     input_data = Input(shape=(32, 20, 20, 1))
 
-        # Inner shape before conv3dtranspose
-    inner_shape = (16, 10, 20)
-
         # encoding layer
     encode_layer = Conv3D(16, kernel_size=(2, 2, 2), 
                           strides=(1, 1, 1), 
                           activation='relu',
                           padding='same', 
                           data_format="channels_last")(input_data)
-
-#        # max pooling 3D
-#    encode_layer = MaxPool3D(pool_size=(2, 2, 2), strides=(2, 2, 2), 
-#                             padding='same')(encode_layer)
 
     encode_layer = Conv3D(32, kernel_size=(2, 2, 2), 
                           strides=(2, 2, 1), 
@@ -135,18 +101,6 @@ def build_3d_AE(optimizer=None, dropout_rate=0.2, num_units=16):
                           padding='same', 
                           data_format="channels_last")(encode_layer)
     
-    
-#    encode_layer = Flatten()(encode_layer)
-#    encode_layer = Dense(2 * num_units, activation='relu')(encode_layer)
-#    encode_layer = Dense(num_units, activation='relu')(encode_layer)
-#    
-#        # decoding layer
-#    decode_layer = Dense(2 * num_units, activation='relu')(encode_layer)
-#    decode_layer = Dense(inner_shape[0] * inner_shape[1] * 
-#                         inner_shape[2] * 32, activation='relu')(encode_layer)
-#    decode_layer = Reshape((inner_shape[0], inner_shape[1], 
-#                            inner_shape[2], 32))(encode_layer)
-
     decode_layer = Conv3DTranspose(128, kernel_size=(2, 2, 2), 
                                    strides=(2, 2, 1), 
                                    activation='relu',
@@ -166,9 +120,6 @@ def build_3d_AE(optimizer=None, dropout_rate=0.2, num_units=16):
                                    activation='relu',
                                    padding='same', 
                                    data_format="channels_last")(decode_layer)
-#        # upsampling 3D
-#    decode_layer = UpSampling3D(size=(2, 2, 2), 
-#                                data_format="channels_last")(decode_layer)    
                                                        
     decode_layer = Conv3DTranspose(1, kernel_size=(2, 2, 2), 
                                    strides=(1, 1, 1), 
@@ -186,31 +137,9 @@ def build_3d_AE(optimizer=None, dropout_rate=0.2, num_units=16):
     return autoencoder
 
 
-def lrSchedule(epoch):
-    lr  = 1e-5
-    
-    if epoch > 80:
-        lr  *= 0.5e-1
-        
-    elif epoch > 30:
-        lr  *= 1e-1    
-        
-#    elif epoch > 20:
-#        lr  *= 1e-1
-        
-    elif epoch > 10:
-        lr  *= 1e-1
-#    
-#    elif epoch > 5:
-#        lr  *= 1e-1
-        
-    print('Learning rate: ', lr)
-    
-    return lr
-
 def train_3d_AE(ae_model=None, x_train=None, x_test=None, 
                 model_out_file=None, epoch_out_file=None, 
-                epochs=10, batch_size=10):
+                epochs=10, batch_size=10, lr_rate=None):
     # Create checkpoint for the training
     # This checkpoint performs model saving when
     # an epoch gives highest testing accuracy
@@ -234,10 +163,10 @@ def train_3d_AE(ae_model=None, x_train=None, x_test=None,
 
 def show_training(epoch_out_file=None):
     records     = pd.read_csv(epoch_out_file)
-    plt.figure()
+    plt.figure(figsize=(10, 10))
     plt.plot(records['val_loss'])
     plt.plot(records['loss'])
-    plt.yticks([0.000,0.005,0.010,0.015,0.020])
+    plt.yticks([0.000,0.005,0.010,0.020,0.030])
     plt.title('Loss value',fontsize=12)
 #    ax = plt.gca()
 #    ax.set_xticklabels([])
@@ -335,13 +264,6 @@ def show_board_snapshot(data_x, data_y, x_index_list,
         ts_chip_x = data_x[data_index, :, :]
         ts_chip_mean = np.mean(ts_chip_x, axis=1).reshape(32, 20)
         
-        #ts_oven_x = ts_data_x[data_index, 640, :].reshape(1, 20)
-        #ts_oven_mean = np.mean(ts_oven_x, axis=1)
-        
-        #ts_x = np.zeros((32, 21))
-        #ts_x[:, :-1] = ts_chip_mean
-        #ts_x[:, -1] = [ts_oven_mean] * 32
-        
         title = 'ID {0}'.format(data_y[data_index])
 
         #imgplt = plt.figure(figsize=(6, 6))
@@ -384,6 +306,83 @@ def show_mse_hist(data_x, encoded_x, data_threshold, loc_row, loc_col,
     scored[chip_hist_title] = compute_mse(chip_data, chip_encoded)
     hist = scored.hist(bins = hist_bins)
 
+def draw_time_series(data_ts, data_y, loc_row, loc_col, 
+                     x_index_list, prefix_title=''):
+    n_parts = len(x_index_list)
+    fig, axes = plt.subplots(1, n_parts, figsize=(n_parts * 5, 5))
+    axes_index = 0    
+    
+    for data_index in x_index_list:
+        data_title = '{0}{1} [{2},{3}]'.format(prefix_title,
+                      data_y[data_index], loc_row, loc_col)
+        data_series = data_ts[data_index, :].flatten()
+        if n_parts == 1:
+            axes_n = axes
+        else:
+            axes_n = axes[axes_index]
+        axes_n.set_title(data_title)
+        
+        axes_n.get_xaxis().set_visible(False)
+        axes_n.plot(data_series)
+        axes_index += 1        
+
+    plt.show()
+
+
+def show_abnormal_status(data_x, data_y, check_abnormal_status, 
+                         loc_row, loc_col):
+    board_size = data_x.shape[0]
+    row_size = data_x.shape[1]
+    col_size = data_x.shape[2]
+    ts_size = data_x.shape[3]
+    
+    data_ts_x = data_x[:, loc_row, loc_col, :, :].reshape(board_size, ts_size)
+    check_status = check_abnormal_status[:, loc_row, loc_col].reshape(board_size)
+    abnormal_status = []
+    normal_status = []
+    
+    for i in range(board_size):
+        if check_status[i]:
+            abnormal_status.append(i)
+        else:
+            normal_status.append(i)
+    
+    if len(abnormal_status) == 0:
+        print('Abnormal chip not found at [{0},{1}]'.format(loc_row, loc_col))
+    else:
+        # Only show 4 sample
+        abnormal_status = abnormal_status[0:4]
+        draw_time_series(data_ts_x, data_y, loc_row, loc_col, 
+                         abnormal_status, prefix_title='Abnormal - ')
+    
+    if len(normal_status) == 0:
+        print('Normal chip not found at [{0},{1}]'.format(loc_row, loc_col))
+    else:
+        # Only show 4 sample
+        normal_status = normal_status[0:4]
+        draw_time_series(data_ts_x, data_y, loc_row, loc_col, 
+                         normal_status, prefix_title='Normal - ')
+    
+
+def check_abnormal(data_x, encoded_x, threshold_data):
+    board_size = data_x.shape[0]
+    row_size = data_x.shape[1]
+    col_size = data_x.shape[2]
+    ts_size = data_x.shape[3]
+    status_list = np.zeros((board_size, row_size, col_size))
+
+    for i in range(row_size):
+        for j in range(col_size):
+            loc_index = i * row_size + j
+            threshold_ts = threshold_data[i, j]
+            data_ts = data_x[:, i, j, :, :].reshape(board_size, ts_size)
+            encoded_ts = encoded_x[:, i, j, :, :].reshape(board_size, ts_size)
+            mse_ts = compute_mse(data_ts, encoded_ts)
+            status_ts = mse_ts >= threshold_ts
+            status_list[:, i, j] = status_ts
+
+    return status_list
+
 
 def compute_mse(data_in, data_pred):
     return np.linalg.norm(data_pred - data_in, axis=-1)
@@ -407,14 +406,15 @@ def compute_mse_threshold(data_x, encoded_x, top_percentage):
             
             threshold_list.append(mse_threshold)
         
-            if loc_index % 100 == 0:
-                print('[{0},{1}] = {2:.5f}'.format(i, j, mse_threshold))
+#            if loc_index % 100 == 0:
+#                print('[{0},{1}] = {2:.5f}'.format(i, j, mse_threshold))
 
     threshold_arr = np.array(threshold_list).reshape(row_size, col_size)
     print(threshold_arr.shape)
 
     return threshold_arr
     
+
 def save_mse_threshold(threshold_data, h5_out_file='mse_threshold.h5'):
     dt = h5py.special_dtype(vlen=str)
     
@@ -426,13 +426,55 @@ def save_mse_threshold(threshold_data, h5_out_file='mse_threshold.h5'):
         hf['mse_threshold'][...] = threshold_data
         print('Save threshold_data: ', threshold_data.shape)
 
-def read_mse_threshold(h5_in_file='mse_threshold.h5'):
-    with h5py.File(h5_in_file, 'r') as hf:
-        mse_threshold = hf['mse_threshold'].value
-        print('Read mse_threshold: ', mse_threshold.shape)        
-        
-    return mse_threshold
 
+def read_train_test_dataset(h5_in_file='dataset.h5'):
+    with h5py.File(h5_in_file, 'r') as hf:
+        train_data = hf['train_data'].value
+        print('Read train_data: ', train_data.shape)
+        
+        train_lbl = hf['train_lbl'].value
+        print('Read train_lbl: ', train_lbl.shape)
+        
+        test_data = hf['test_data'].value
+        print('Read test_data: ', test_data.shape)
+        
+        test_lbl = hf['test_lbl'].value
+        print('Read test_lbl: ', test_lbl.shape)
+                
+    return (train_data, train_lbl, test_data, test_lbl)
+
+
+def save_train_test_dataset(train_data, train_lbl, test_data, test_lbl, 
+                            h5_out_file='dataset.h5'):
+    dt = h5py.special_dtype(vlen=str)
+    
+    with h5py.File(h5_out_file, 'w') as hf:
+        
+        hf.create_dataset(name="train_data", shape=train_data.shape, 
+                          dtype=np.single,
+                          compression="gzip", compression_opts=9)
+        hf['train_data'][...] = train_data
+        print('Save train_data: ', train_data.shape)
+        
+        hf.create_dataset(name="train_lbl", shape=train_lbl.shape, 
+                          dtype=np.int,
+                          compression="gzip", compression_opts=9)
+        hf['train_lbl'][...] = train_lbl
+        print('Save train_lbl: ', train_lbl.shape)
+        
+        hf.create_dataset(name="test_data", shape=test_data.shape, 
+                          dtype=np.single,
+                          compression="gzip", compression_opts=9)
+        hf['test_data'][...] = test_data
+        print('Save test_data: ', test_data.shape)
+        
+        hf.create_dataset(name="test_lbl", shape=test_lbl.shape, 
+                          dtype=np.int,
+                          compression="gzip", compression_opts=9)
+        hf['test_lbl'][...] = test_lbl
+        print('Save test_lbl: ', test_lbl.shape)
+           
+        
     # fix random seed for reproducibility
 seed = 49
 np.random.seed(seed)
@@ -444,6 +486,7 @@ plt.rcParams['ytick.left'] = False
 plt.rcParams['ytick.labelleft'] = False
 
 modelname = 'CA3ModelV1'
+saved_dataset_file = modelname + '_dataset.hdf5'
 saved_model_file = modelname + '_model.hdf5'
 saved_training_file = modelname + '_train.csv'
 saved_model_design_file = modelname + '_design.pdf'
@@ -453,31 +496,52 @@ saved_threshold_file = modelname + '_threshold.hdf5'
 num_feature_units = 8 * 5 * 10
 mse_threshold_percent = 1
 
-learning_rate = 1e-04
-epochs_size = 2
+learning_rate = 0.5e-4
+epochs_size = 100
 batch_size = 1
 
 optmz = optimizers.Adam(lr=learning_rate)
 #optmz = optimizers.RMSprop(lr=learning_rate)
 
-    # Whether perform training
-perform_training_process = True
+    # Whether show trained model
+show_trained_model = True
 
-        # Whether show trained model
-show_trained_model = False
+    # Show individula chip location threshold differences
+show_threshold_diff = True
 
-    # Whether using real data or random generated data (experiment only) 
-test_on_real_data = True
-
-
-if test_on_real_data:
-    tr_data, tr_lbl, ts_data, ts_lbl = prepare_dataset(
-            data_csv_file=chips_temp_file)
+def lrSchedule(epoch):
+    lr  = learning_rate
     
+    if epoch > 80:
+        lr  *= 0.5e-1 
+    
+    elif epoch > 40:
+        lr  *= 1e-1    
+        
+    elif epoch > 20:
+        lr  *= 1e-1
+        
+    elif epoch > 10:
+        lr  *= 1e-1
+    
+    elif epoch > 1:
+        lr  *= 1e-1
+        
+    print('Learning rate: ', lr)
+    
+    return lr
+
+    # Prepare training and testing dataset
+    # and save to hdf5 file; Next time load
+    # traingin and testing data directly from hdf5 file
+if not os.path.exists(saved_dataset_file):
+    tr_data, tr_lbl, ts_data, ts_lbl = prepare_dataset(
+        data_csv_file=chips_temp_file)
+    save_train_test_dataset(tr_data, tr_lbl, ts_data, ts_lbl, 
+                            h5_out_file=saved_dataset_file)
 else:
-        # Generate dataset for testing
-    total_num_data = 400
-    tr_data, tr_lbl, ts_data, ts_lbl = generate_dataset(total_num_data)
+    tr_data, tr_lbl, ts_data, ts_lbl = read_train_test_dataset(
+            h5_in_file=saved_dataset_file)
 
     # Convert the data into 'float32'
     # Rescale the values from 0~255 to 0~1
@@ -490,124 +554,79 @@ imgclms = tr_data.shape[2]
 imgdepth = tr_data.shape[3]
 channel = tr_data.shape[4]
 
-if perform_training_process:
+    # Whether perform threshold computation
+perform_computing_threshold = True
 
-        # Whether perform threshold computation
-    perform_computing_threshold = True
-    
-        # Build autoencoder
-    ae_3d_model = build_3d_AE(optimizer=optmz, dropout_rate=0.2, 
-                              num_units=num_feature_units)
-    ae_3d_model.summary()
-    
-        # Train autoencoder
-    train_3d_AE(ae_3d_model, x_train=tr_data, x_test=ts_data, 
-                model_out_file=saved_model_file,
-                epoch_out_file=saved_training_file,
-                epochs=epochs_size, batch_size=batch_size)
-    
-        # Show training
-    show_training(epoch_out_file=saved_training_file)
-    
-        # Export model design
-    export_3d_AE(ae_model=ae_3d_model, 
-                 export_model_file=saved_model_design_file)
+    # Build autoencoder
+ae_3d_model = build_3d_AE(optimizer=optmz, dropout_rate=0.2, 
+                          num_units=num_feature_units)
+ae_3d_model.summary()
 
-    if perform_computing_threshold:
-        encoded_tr_data = ae_3d_model.predict(tr_data)
-        threshold_data = compute_mse_threshold(tr_data, encoded_tr_data, 
-                                               mse_threshold_percent)
-        save_mse_threshold(threshold_data, h5_out_file=saved_threshold_file)
-        threshold_saved = read_mse_threshold(h5_in_file=
-                                                  saved_threshold_file)
-        
-        check_pos_list = [(0, 0), (3, 4), (6,8), (9,12),
-                          (12,16), (25,0), (28,4), (31,8)]
-        for pos in check_pos_list:
-            if threshold_data[pos[0], pos[1]] != threshold_saved[pos[0], pos[1]]:
-                print('Error! incorrect saved threshold [{0}, {1}]={2}'.format(
-                       pos[0], pos[1], threshold_saved[pos[0], pos[1]])) 
-                
-            show_mse_hist(tr_data, encoded_tr_data, threshold_saved,
-                          pos[0], pos[1])
-        
+    # Train autoencoder
+train_3d_AE(ae_3d_model, x_train=tr_data, x_test=ts_data, 
+            model_out_file=saved_model_file,
+            epoch_out_file=saved_training_file,
+            epochs=epochs_size, batch_size=batch_size)
+
+    # Show training
+show_training(epoch_out_file=saved_training_file)
+
+    # Export model design
+export_3d_AE(ae_model=ae_3d_model, 
+             export_model_file=saved_model_design_file)
+
+    # Predict training data with autoencoder model
+encoded_tr_data = ae_3d_model.predict(tr_data)
+
+    # Compute Mean Square Error threshold
+threshold_data = compute_mse_threshold(tr_data, encoded_tr_data, 
+                                       mse_threshold_percent)
+    # Save threshold to hdf5 file
+save_mse_threshold(threshold_data, h5_out_file=saved_threshold_file)
+
+    # Check abnormal status
+check_status = check_abnormal(tr_data, encoded_tr_data, threshold_data)
+
+check_pos_list = [(0, 0), (0, 9), (0,19),
+               (7, 0), (7, 9), (7,19),
+               (15,0), (15,9), (15,19),
+               (23,0), (23,9), (23,19),
+               (31,0), (31,9), (31,19)]
+
+if show_threshold_diff:
+    
+    for pos in check_pos_list:
+        show_mse_hist(tr_data, encoded_tr_data, threshold_data,
+                      pos[0], pos[1])
+        show_abnormal_status(tr_data, tr_lbl, check_status, pos[0], pos[1])
 
 if show_trained_model:
+        # Show original data
+    print()
+    print('Training data, shape: ', tr_data.shape)
+    print('Decoded Training data, shape: ', encoded_tr_data.shape)
     
-        # Whether show model summary
-    show_model_summary = False
-    
-        # Whether show prediction differences on board
-    show_board_diff = False
-    
-        # Show individual chip location time series differences
-    show_chip_diff = True
-    
-        # Build autoencoder
-    pretrained_ae_model = load_3d_AE(model_weights_file=saved_model_file,
-                             optimizer=optmz, dropout_rate=0.2, 
-                             num_units=num_feature_units)
-    if show_model_summary:
-        print()
-        print('pretrained autoencoder model')
-        pretrained_ae_model.summary()
+    print()
+    print('Training Data - Borad Temperature ')
+    show_board_snapshot(tr_data, tr_lbl, 
+                        range(0, tr_data.shape[0], 
+                              int(tr_data.shape[0] / 4)), 
+                        clrmap='gist_heat')
+        # Show decoded data
+    print()
+    print('Encoded Training Data - Borad Temperature ')
+    show_board_snapshot(encoded_tr_data, tr_lbl, 
+                        range(0, encoded_tr_data.shape[0], 
+                              int(encoded_tr_data.shape[0] / 5)), 
+                        clrmap='gist_heat')
 
-        # Load pre-trained model
-    encoded_tr_data = pretrained_ae_model.predict(tr_data)
-
-    encoded_ts_data = pretrained_ae_model.predict(ts_data)
-
-    if show_board_diff:
-            # Show original data
-        print()
-        print('Training data, shape: ', tr_data.shape)
-        print('Decoded Training data, shape: ', encoded_tr_data.shape)
-        print('Test data, shape: ', ts_data.shape)
-        print('Decoded Test data, shape: ', encoded_ts_data.shape)
+    for chip_loc_x, chip_loc_y in check_pos_list:
+        chip_loc = chip_loc_x * 20 + chip_loc_y
         
         print()
-        print('Training Data - Borad Temperature ')
-        show_board_snapshot(tr_data, tr_lbl, 
-                            range(0, tr_data.shape[0], 
-                                  int(tr_data.shape[0] / 4)), 
-                            clrmap='gist_heat')
-            # Show decoded data
-        print()
-        print('Encoded Training Data - Borad Temperature ')
-        show_board_snapshot(encoded_tr_data, tr_lbl, 
-                            range(0, encoded_tr_data.shape[0], 
-                                  int(encoded_tr_data.shape[0] / 5)), 
-                            clrmap='gist_heat')
-
-        print()
-        print('Test Data - Borad Temperature ')
-        show_board_snapshot(ts_data, ts_lbl, 
-                            range(0, ts_data.shape[0], 
-                                  int(ts_data.shape[0] / 4)), 
-                            clrmap='gist_heat')
-            # Show decoded data
-        print()
-        print('Encoded Test Data - Borad Temperature ')
-        show_board_snapshot(encoded_ts_data, ts_lbl, 
-                            range(0, encoded_ts_data.shape[0], 
-                                  int(encoded_ts_data.shape[0] / 5)), 
-                            clrmap='gist_heat')
-
-
-    if show_chip_diff:
-        chip_loc_xy = [(0, 0), (0, 9), (0,19),
-                       (7, 0), (7, 9), (7,19),
-                       (15,0), (15,9), (15,19),
-                       (23,0), (23,9), (23,19),
-                       (31,0), (31,9), (31,19)]
-        
-        for chip_loc_x, chip_loc_y in chip_loc_xy:
-            chip_loc = chip_loc_x * 20 + chip_loc_y
-            
-            print()
-            print(('Training vs Encoded Data - Chip [{0}, {1}] Temperature '
-                   ).format(chip_loc_x, chip_loc_y))
-            show_time_series_image(tr_data, encoded_tr_data, chip_loc,
-                                   images_in_row=8, clrmap='gist_heat')
+        print(('Training vs Encoded Data - Chip [{0}, {1}] Temperature '
+               ).format(chip_loc_x, chip_loc_y))
+        show_time_series_image(tr_data, encoded_tr_data, chip_loc,
+                               images_in_row=8, clrmap='gist_heat')
         
         
