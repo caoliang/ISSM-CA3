@@ -1,0 +1,606 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans Mono'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">2</span><span style=" color:#000080;">]:</span> runfile('D:/ISS/MTech2019/ISY5002/ISY5002-ISSM/ISSM_Assignment/ISSM_CA3/ISSM_CA3_GC_Array_Model_Training.py', wdir='D:/ISS/MTech2019/ISY5002/ISY5002-ISSM/ISSM_Assignment/ISSM_CA3')</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Using TensorFlow backend.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Read train_data:  (320, 32, 20, 20, 1)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Read train_lbl:  (320,)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Read test_data:  (80, 32, 20, 20, 1)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Read test_lbl:  (80,)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Build AE array [0, 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">WARNING:tensorflow:From D:\App\Anaconda3\envs\prmls-ca2\lib\site-packages\tensorflow\python\ops\resource_variable_ops.py:435: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Instructions for updating:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Colocations handled automatically by placer.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">WARNING:tensorflow:From D:\App\Anaconda3\envs\prmls-ca2\lib\site-packages\tensorflow\python\keras\utils\losses_utils.py:170: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Instructions for updating:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Use tf.cast instead.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Build AE array [10, 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Build AE array [20, 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Build AE array [30, 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Complete to build AE array:  (32, 20)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">_________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Layer (type)                 Output Shape              Param #   </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">=================================================================</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">input_1 (InputLayer)         (None, 20)                0         </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">_________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">dense (Dense)                (None, 10)                210       </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">_________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">dense_1 (Dense)              (None, 20)                220       </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">=================================================================</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Total params: 430</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Trainable params: 430</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Non-trainable params: 0</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">_________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Train AE array [0, 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Train on 320 samples, validate on 80 samples</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">WARNING:tensorflow:From D:\App\Anaconda3\envs\prmls-ca2\lib\site-packages\tensorflow\python\ops\math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Instructions for updating:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Use tf.cast instead.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 1/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0869 </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00001: val_loss improved from inf to 0.08475, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 9s 28ms/sample - loss: 0.0869 - val_loss: 0.0847</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 2/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">290/320 [==========================&gt;...] - ETA: 0s - loss: 0.0830</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00002: val_loss improved from 0.08475 to 0.08104, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 1ms/sample - loss: 0.0829 - val_loss: 0.0810</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 3/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0795</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00003: val_loss improved from 0.08104 to 0.07789, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 889us/sample - loss: 0.0794 - val_loss: 0.0779</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 4/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0766</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00004: val_loss improved from 0.07789 to 0.07525, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 888us/sample - loss: 0.0765 - val_loss: 0.0752</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 5/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0741</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00005: val_loss improved from 0.07525 to 0.07304, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 982us/sample - loss: 0.0741 - val_loss: 0.0730</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 6/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0721</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00006: val_loss improved from 0.07304 to 0.07120, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 938us/sample - loss: 0.0721 - val_loss: 0.0712</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 7/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0704</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00007: val_loss improved from 0.07120 to 0.06969, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 991us/sample - loss: 0.0704 - val_loss: 0.0697</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 8/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">300/320 [===========================&gt;..] - ETA: 0s - loss: 0.0690</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00008: val_loss improved from 0.06969 to 0.06844, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 922us/sample - loss: 0.0690 - val_loss: 0.0684</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 9/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0679</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00009: val_loss improved from 0.06844 to 0.06742, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 1ms/sample - loss: 0.0679 - val_loss: 0.0674</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 10/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">300/320 [===========================&gt;..] - ETA: 0s - loss: 0.0670</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00010: val_loss improved from 0.06742 to 0.06658, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 1ms/sample - loss: 0.0670 - val_loss: 0.0666</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 11/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0662</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00011: val_loss improved from 0.06658 to 0.06590, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 1ms/sample - loss: 0.0662 - val_loss: 0.0659</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 12/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0656</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00012: val_loss improved from 0.06590 to 0.06533, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 1ms/sample - loss: 0.0656 - val_loss: 0.0653</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 13/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">300/320 [===========================&gt;..] - ETA: 0s - loss: 0.0651</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00013: val_loss improved from 0.06533 to 0.06487, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 1ms/sample - loss: 0.0651 - val_loss: 0.0649</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 14/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">300/320 [===========================&gt;..] - ETA: 0s - loss: 0.0646</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00014: val_loss improved from 0.06487 to 0.06448, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 816us/sample - loss: 0.0646 - val_loss: 0.0645</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 15/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0643</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00015: val_loss improved from 0.06448 to 0.06416, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 914us/sample - loss: 0.0643 - val_loss: 0.0642</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 16/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0640</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00016: val_loss improved from 0.06416 to 0.06389, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 980us/sample - loss: 0.0640 - val_loss: 0.0639</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 17/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0637</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00017: val_loss improved from 0.06389 to 0.06367, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 980us/sample - loss: 0.0637 - val_loss: 0.0637</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 18/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">300/320 [===========================&gt;..] - ETA: 0s - loss: 0.0635</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00018: val_loss improved from 0.06367 to 0.06348, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 922us/sample - loss: 0.0635 - val_loss: 0.0635</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 19/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0634</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00019: val_loss improved from 0.06348 to 0.06332, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 763us/sample - loss: 0.0634 - val_loss: 0.0633</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 20/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0632</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00020: val_loss improved from 0.06332 to 0.06319, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 766us/sample - loss: 0.0632 - val_loss: 0.0632</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  0.0001</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 21/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0631</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00021: val_loss improved from 0.06319 to 0.06308, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 752us/sample - loss: 0.0631 - val_loss: 0.0631</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 22/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">300/320 [===========================&gt;..] - ETA: 0s - loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00022: val_loss improved from 0.06308 to 0.06307, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 778us/sample - loss: 0.0630 - val_loss: 0.0631</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 23/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00023: val_loss improved from 0.06307 to 0.06306, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 775us/sample - loss: 0.0630 - val_loss: 0.0631</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 24/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00024: val_loss improved from 0.06306 to 0.06305, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 760us/sample - loss: 0.0630 - val_loss: 0.0631</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 25/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">290/320 [==========================&gt;...] - ETA: 0s - loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00025: val_loss improved from 0.06305 to 0.06304, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 770us/sample - loss: 0.0630 - val_loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 26/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00026: val_loss improved from 0.06304 to 0.06303, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 767us/sample - loss: 0.0630 - val_loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 27/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00027: val_loss improved from 0.06303 to 0.06302, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 756us/sample - loss: 0.0630 - val_loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 28/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00028: val_loss improved from 0.06302 to 0.06301, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 761us/sample - loss: 0.0630 - val_loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 29/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00029: val_loss improved from 0.06301 to 0.06300, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 771us/sample - loss: 0.0630 - val_loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 30/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00030: val_loss improved from 0.06300 to 0.06299, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 756us/sample - loss: 0.0629 - val_loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 31/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">300/320 [===========================&gt;..] - ETA: 0s - loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00031: val_loss improved from 0.06299 to 0.06298, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 764us/sample - loss: 0.0629 - val_loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 32/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00032: val_loss improved from 0.06298 to 0.06297, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 748us/sample - loss: 0.0629 - val_loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 33/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00033: val_loss improved from 0.06297 to 0.06296, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 957us/sample - loss: 0.0629 - val_loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 34/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00034: val_loss improved from 0.06296 to 0.06295, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 977us/sample - loss: 0.0629 - val_loss: 0.0630</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 35/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00035: val_loss improved from 0.06295 to 0.06294, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 998us/sample - loss: 0.0629 - val_loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 36/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00036: val_loss improved from 0.06294 to 0.06293, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 982us/sample - loss: 0.0629 - val_loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 37/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">300/320 [===========================&gt;..] - ETA: 0s - loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00037: val_loss improved from 0.06293 to 0.06293, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 994us/sample - loss: 0.0629 - val_loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 38/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">300/320 [===========================&gt;..] - ETA: 0s - loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00038: val_loss improved from 0.06293 to 0.06292, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 875us/sample - loss: 0.0629 - val_loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 39/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00039: val_loss improved from 0.06292 to 0.06291, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 975us/sample - loss: 0.0629 - val_loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Learning rate:  1e-05</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 40/40</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310/320 [============================&gt;.] - ETA: 0s - loss: 0.0628</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 00040: val_loss improved from 0.06291 to 0.06290, saving model to CA3ModelV1_model_array\AE_array_0-0.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320/320 [==============================] - 0s 924us/sample - loss: 0.0628 - val_loss: 0.0629</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Complete to train AE array [0, 0]: </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Complete to train AE array:  (32, 20)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Traceback <span style=" color:#4682b4;">(most recent call last)</span>:</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;&lt;ipython-input-2-d563d20b10e9&gt;&quot;</span>, line <span style=" color:#00ff00;">1</span>, in <span style=" color:#ff00ff;">&lt;module&gt;</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    runfile('D:/ISS/MTech2019/ISY5002/ISY5002-ISSM/ISSM_Assignment/ISSM_CA3/ISSM_CA3_GC_Array_Model_Training.py', wdir='D:/ISS/MTech2019/ISY5002/ISY5002-ISSM/ISSM_Assignment/ISSM_CA3')</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;D:\App\Anaconda3\envs\prmls-ca2\lib\site-packages\spyder_kernels\customize\spydercustomize.py&quot;</span>, line <span style=" color:#00ff00;">827</span>, in <span style=" color:#ff00ff;">runfile</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    execfile(filename, namespace)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;D:\App\Anaconda3\envs\prmls-ca2\lib\site-packages\spyder_kernels\customize\spydercustomize.py&quot;</span>, line <span style=" color:#00ff00;">110</span>, in <span style=" color:#ff00ff;">execfile</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    exec(compile(f.read(), filename, 'exec'), namespace)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;D:/ISS/MTech2019/ISY5002/ISY5002-ISSM/ISSM_Assignment/ISSM_CA3/ISSM_CA3_GC_Array_Model_Training.py&quot;</span>, line <span style=" color:#00ff00;">642</span>, in <span style=" color:#ff00ff;">&lt;module&gt;</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    epoch_out_folder=saved_training_folder)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;D:/ISS/MTech2019/ISY5002/ISY5002-ISSM/ISSM_Assignment/ISSM_CA3/ISSM_CA3_GC_Array_Model_Training.py&quot;</span>, line <span style=" color:#00ff00;">192</span>, in <span style=" color:#ff00ff;">show_training_array</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    show_training(row_i, col_i, epoch_out_folder)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;D:/ISS/MTech2019/ISY5002/ISY5002-ISSM/ISSM_Assignment/ISSM_CA3/ISSM_CA3_GC_Array_Model_Training.py&quot;</span>, line <span style=" color:#00ff00;">179</span>, in <span style=" color:#ff00ff;">show_training</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    records     = pd.read_csv(ae_epoch_file)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;D:\App\Anaconda3\envs\prmls-ca2\lib\site-packages\pandas\io\parsers.py&quot;</span>, line <span style=" color:#00ff00;">685</span>, in <span style=" color:#ff00ff;">parser_f</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    return _read(filepath_or_buffer, kwds)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;D:\App\Anaconda3\envs\prmls-ca2\lib\site-packages\pandas\io\parsers.py&quot;</span>, line <span style=" color:#00ff00;">457</span>, in <span style=" color:#ff00ff;">_read</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    parser = TextFileReader(fp_or_buf, **kwds)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;D:\App\Anaconda3\envs\prmls-ca2\lib\site-packages\pandas\io\parsers.py&quot;</span>, line <span style=" color:#00ff00;">895</span>, in <span style=" color:#ff00ff;">__init__</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    self._make_engine(self.engine)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;D:\App\Anaconda3\envs\prmls-ca2\lib\site-packages\pandas\io\parsers.py&quot;</span>, line <span style=" color:#00ff00;">1135</span>, in <span style=" color:#ff00ff;">_make_engine</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    self._engine = CParserWrapper(self.f, **self.options)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;D:\App\Anaconda3\envs\prmls-ca2\lib\site-packages\pandas\io\parsers.py&quot;</span>, line <span style=" color:#00ff00;">1917</span>, in <span style=" color:#ff00ff;">__init__</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    self._reader = parsers.TextReader(src, **kwds)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;pandas\_libs\parsers.pyx&quot;</span>, line <span style=" color:#00ff00;">382</span>, in <span style=" color:#ff00ff;">pandas._libs.parsers.TextReader.__cinit__</span></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#4682b4;">  File </span><span style=" color:#006400;">&quot;pandas\_libs\parsers.pyx&quot;</span><span style=" color:#4682b4;">, line </span><span style=" color:#006400;">689</span><span style=" color:#4682b4;">, in </span><span style=" color:#9400d3;">pandas._libs.parsers.TextReader._setup_parser_source</span></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">FileNotFoundError:</span> [Errno 2] File b'CA3ModelV1_model_array_training\\AE_array_train_0-9.csv' does not exist: b'CA3ModelV1_model_array_training\\AE_array_train_0-9.csv'</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><img src="data:image/png;base64,
+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
+U9FKTh2PWVzbgV2VKxcJIbzHJwMTejbLS/ej2WyMsAbTblM5JrfeFUJ4kQ8H
+Zjp0dUJ5qRzALoTwCT4bmAxzHMCuFe8j1hRAmFHP/m8lMIUQ3uOzgalEmCE6
+Dq14L4qiMDo6mKLqNm+XJYS4jPlsYELPfsySb9BUlbExoZxo6eZEi+zHFEJ4
+h08HJsNGQ2szVB5jbGwIAHuqZJQphPAOnw5MZVg6AFrxXhLDAzEHG/haAlMI
+4SU+HZgMioWIKOjZjzk2JoSvTrTKnSSFEF7h04GpKArKsHS04n1omsbY2BAa
+OuwcbZT9mEIIz/PpwARg+Gior4HaasbGhAKwp6rVy0UJIS5HPh+Yp/Zj7iPa
+FECsKYCvTsh+TCGE5/l8YBKfAiGhzhujjY0NoehEm5xXLoTwOJ8PTEWng7RR
+zhujjY0Jpa1bpbROLvcmhPAsnw9M6DmAveoYWlMDGT3HY8pmuRDC0/wkMB37
+MSnZR2SQgZRII1/JxI8QwsMM3i7AJalDISAQ7eBelInTGBsbwgfFDXTZVQL1
+fpH5QojvoLCwkPXr16OqKtnZ2cydO7fX+93d3axZs4ZDhw4RFhZGbm4u0dHR
+fPbZZ7zzzjvOduXl5Tz55JOkpqayfPly6uvrCQwMBGDZsmVERESctw6/CEzF
+EABDR6HtKwRgbEwI7+6v50BNOxk9hxoJIQYmVVV56aWXWLZsGRaLhaVLl5KZ
+mUliYqKzzebNmwkNDWX16tVs376dDRs2sHjxYqZPn8706dMBR1j+/ve/JzU1
+1bncokWLSEtLc7kWvxmeKRmZUHkUrbaaMTEh6BT4Sk6TFGLAKykpITY2lpiY
+GAwGA9OmTSM/P79Xm4KCAmbOnAlAVlYWRUVFZ50RuG3bNq644orvVEu/R5hW
+q9X1DzcY+tX+fGzTs6l98yVCDx9g0DU3MDKmin21XRf8/EtZw8Xwdv++UIO3
++/eFGrzdvz/UsGTJEufjnJwccnJyAKirq8NisTjfs1gsFBcX91r29DZ6vZ6Q
+kBCam5sJDw93ttm5cycPPvhgr+Wee+45dDodU6ZMYd68eSiKcv76Xfgde6mp
+qXG5rdVq7Vf789GMoWCJpjnvU9oyp5NuCeT/31dLeeUJQgL0HqnhYni7f1+o
+wdv9+0IN3u7f12uIj49n5cqVfS7T17Ujzgy2C7UpLi4mMDCQ5ORk52uLFi0i
+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
+XAghXOS2K64XFhayfv16VFUlOzubuXPnuqurc7r33nsJCgpCp9Oh1+tZuXKl
+W/t77rnn2L17NxEREaxatQqAlpYWnnnmGb799lsGDRrE4sWLMZlMHq3hzTff
+5OOPPyY8PByAW2+9lYkTJ7ql/5qaGtauXUtDQwOKopCTk8O1117rsfVwrv49
+uQ66urp49NFHsdls2O12srKyuPnmm6murubZZ5+lpaWFwYMHs3DhQgyGS/8n
+eK7+165dy759+wgJCQEcfx+pqamXvP/TqarKkiVLiIqKYsmSJR5bB26juYHd
+btfuu+8+raqqSuvu7tZ++ctfakePHnVHV+d1zz33aI2NjR7rb+/evVppaal2
+//33O1979dVXtbfeekvTNE176623tFdffdXjNWzcuFF7++233drvSXV1dVpp
+aammaZrW1tamLVq0SDt69KjH1sO5+vfkOlBVVWtvb9c0TdO6u7u1pUuXagcO
+HNBWrVqlbdu2TdM0TVu3bp32wQcfeLT/NWvWaDt37nRLn+fy7rvvas8++6z2
+xBNPaJqmeWwduItbNslLSkqIjY0lJiYGg8HAtGnTyM/Pd0dXPiU9Pf2sUVN+
+fj4zZswAYMaMGW5fD33V4Elms9m5Uz84OJiEhATq6uo8th7O1b8nKYpCUFAQ
+AHa7HbvdjqIo7N27l6ysLABmzpzptnVwrv49rba2lt27d5OdnQ04bqrmqXXg
+Lm4ZC9fV1WGxWJzPLRYLxcXF7ujqglasWAHA1VdfTU5Ojsf7b2xsxGw2A44/
+5qamJo/XAPDBBx+wdetWhgwZwu233+6RUK2urubw4cMMHTrUK+vh9P7379/v
+0XWgqiq/+tWvqKqq4gc/+AExMTGEhISg1ztuQRkVFeXWID+z/2HDhvHhhx/y
+xhtv8Pe//50xY8Zw2223ERDgvtubvfzyy/zkJz+hvb0dgObmZo+uA3dwS2Bq
+fUy8e+Mb7vHHHycqKorGxkZ+97vfER8fT3p6usfr8Lbvf//73HTTTQBs3LiR
+V155hXvuucetfXZ0dLBq1SruuOMO5z4zTzqzf0+vA51Ox1NPPUVraytPP/00
+x48fd1tfrvRfXl7O/PnziYyMxGazsW7dOt5++23nOrnUdu3aRUREBEOGDGHv
+3r1u6cMb3LJJbrFYqK2tdT6vra11ji48KSoqCoCIiAgmT55MSUmJx2uIiIig
+vr4egPr6euekgydFRkai0+nQ6XRkZ2dTWlrq1v5sNhurVq1i+vTpTJkyBfDs
+euirf0+vg5NCQ0NJT0+nuLiYtrY27HY74NgKO/n/pyf6LywsxGw2oygKAQEB
+zJo1y61/DwcOHKCgoIB7772XZ599lqKiIl5++WWvrINLyS2BmZaWRmVlJdXV
+1dhsNnbs2EFmZqY7ujqnjo4O56ZAR0cHX331FcnJyR6tASAzM5NPP/0UgE8/
+/ZTJkyd7vIaTQQXwxRdfkJSU5La+NE3j+eefJyEhgTlz5jhf99R6OFf/nlwH
+TU1NtLa2Ao4Z66+//pqEhARGjx5NXl4eAFu2bHHb38S5+j+5DjRNIz8/363r
+YP78+Tz//POsXbuW3NxcxowZw6JFizy2DtzFbQeu7969m7/85S+oqsqsWbO4
+8cYb3dHNOZ04cYKnn34acOz4vvLKK91ew7PPPsu+fftobm4mIiKCm2++mcmT
+J/PMM89QU1OD1Wrl/vvvd+u+s75q2Lt3L0eOHEFRFAYNGsRdd93lthH//v37
+eeSRR0hOTnbuhrn11lsZNmyYR9bDufrfvn27x9ZBWVkZa9euRVVVNE1j6tSp
+3HTTTZw4ceKsQ2rcsQ/xXP0/9thjzn3HKSkp3HXXXc7JIXfau3cv7777LkuW
+LPHYOnAXOdNHCCFcJGf6CCGEiyQwhRDCRRKYQgjhIglMIYRwkQSmEEK4SAJT
+CCFcJIEphBAuksAUQggX/T+6BRiR5gOOFAAAAABJRU5ErkJggg==
+" /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">3</span><span style=" color:#000080;">]:</span> </p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">3</span><span style=" color:#000080;">]:</span> </p></body></html>
